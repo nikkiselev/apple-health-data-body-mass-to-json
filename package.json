@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run clean && npm run build:types && npm run build:js",
+    "build": "npm run prebuild && npm run build:types && npm run build:js",
+    "prebuild": "npm run type-check && npm run lint-fix && npm run clean",
     "clean": "rimraf ./dist",
+    "type-check": "tsc --noEmit",
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
     "lint-fix": "npm run prettier-fix && npm run eslint-fix",
