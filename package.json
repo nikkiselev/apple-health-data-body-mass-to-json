@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run prebuild && npm run build:types && npm run build:js",
-    "prebuild": "npm run type-check && npm run lint-fix && npm run clean",
+    "build": "npm run pre && npm run build:types && npm run build:js",
+    "pre": "npm run type-check && npm run lint-fix && npm run clean",
     "clean": "rimraf ./dist",
     "type-check": "tsc --noEmit",
     "build:types": "tsc --emitDeclarationOnly",
