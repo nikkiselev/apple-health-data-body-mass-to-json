@@ -25,7 +25,7 @@
     ]
   },
   "bin": {
-    "apple-health-data-body-mass-to-json": "./dist/cli.js"
+    "apple-health-data-body-mass-to-json": "./dist/index.js"
   },
   "author": "Nikolai Kiselev",
   "license": "MIT",
