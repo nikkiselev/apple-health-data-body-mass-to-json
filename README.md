@@ -20,3 +20,6 @@ Install via package.json:
 If the export file is too large, you might want to increase max memory size:
 
 `npx --node-arg=--max-old-space-size=8192 apple-health-data-body-mass-to-json --in export_cda.xml --out data.json`
+
+
+Note, that project doesn't have tests nor deal with the exceptions
