@@ -16,14 +16,21 @@ export default async (filePath: string) => {
 
   const data: any = []
 
-  entries.forEach((entry: any) => {
+  let foundEntryWithBodyMassRecords = false
+
+  for (const entry of entries) {
     entry?.organizer[0]?.component.forEach((component: any) => {
       const text: any = component?.observation[0]?.text[0]
       if (text.type[0] === 'HKQuantityTypeIdentifierBodyMass') {
+        foundEntryWithBodyMassRecords = true
         data.push({ weight: text.value[0] })
       }
     })
-  })
+
+    if (foundEntryWithBodyMassRecords) {
+      break
+    }
+  }
 
   return data
 }
