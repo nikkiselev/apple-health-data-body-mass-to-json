@@ -1,5 +1,5 @@
 # Apple health data export body mass to json
-Command line Node.js tool that reads body mass from Apple Health App XML export file and writes it to JSON file. 
+Node.js command line tool that reads body mass from Apple Health App XML export file and writes it to JSON file. 
 
 ## Getting started
 
