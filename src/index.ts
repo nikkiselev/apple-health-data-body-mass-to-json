@@ -8,17 +8,16 @@ const parse = async (filePath: string) => {
   return parseStringPromise(content, { ignoreAttrs: true })
 }
 
+const bodyMassTypeName = 'HKQuantityTypeIdentifierBodyMass'
+
 const getBodyMassFromEntry = (entry: any) => {
-  const bodyMassTypeName = 'HKQuantityTypeIdentifierBodyMass'
-
   const text: any = entry?.observation[0]?.text[0]
-
-  if (text.type[0] === bodyMassTypeName) {
-    return { weight: text.value[0] }
-  }
-
-  return undefined
+  return { weight: text.value[0] }
 }
+
+const entryWithBodyMassRecords = (entry: any) =>
+  entry?.organizer[0]?.component[0]?.observation[0]?.text[0]?.type[0] ===
+  bodyMassTypeName
 
 export default async (filePath: string) => {
   const parsed = await parse(filePath)
@@ -28,19 +27,12 @@ export default async (filePath: string) => {
 
   const data: any = []
 
-  let foundEntryWithBodyMassRecords = false
+  const ourEntry = entries.find(entryWithBodyMassRecords)
 
-  for (const entry of entries) {
-    for (const component of entry?.organizer[0]?.component) {
-      const bm = getBodyMassFromEntry(component)
-      if (bm) {
-        foundEntryWithBodyMassRecords = true
-        data.push(bm)
-      }
-    }
-
-    if (foundEntryWithBodyMassRecords) {
-      break
+  for (const component of ourEntry?.organizer[0]?.component) {
+    const bm = getBodyMassFromEntry(component)
+    if (bm) {
+      data.push(bm)
     }
   }
 
