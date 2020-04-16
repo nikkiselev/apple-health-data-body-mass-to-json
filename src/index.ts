@@ -5,12 +5,16 @@ import { parseStringPromise } from 'xml2js'
 const parse = async (filePath: string) => {
   const content = await fs.readFile(path.join(__dirname, filePath), 'utf8')
 
-  return parseStringPromise(content, { ignoreAttrs: true })
+  return parseStringPromise(content)
 }
 
 const transform = (record: any) => {
-  const [value] = record?.observation[0]?.text[0]
-  return { value }
+  const observation = record?.observation[0]
+
+  const value = observation?.text[0]?.value[0]
+  const date = observation?.effectiveTime[0]?.low[0].$.value
+
+  return { value, date }
 }
 
 const entryWithBodyMassRecords = (entry: any) =>
