@@ -1,19 +1,8 @@
 #!/usr/bin/env node
 import minimist from 'minimist'
-import { promises as fs } from 'fs'
-import path from 'path'
-import { parseStringPromise } from 'xml2js'
+import parseXMLFile from './parseXMLFile'
 
 const args = minimist(process.argv.slice(2))
-
-/**
- * Parse an XML file on the given path to an object
- */
-const parse = async (filePath: string) => {
-  const content = await fs.readFile(path.join(__dirname, filePath), 'utf8')
-
-  return parseStringPromise(content)
-}
 
 /**
  * Transform parsed record to a neat object
@@ -38,7 +27,7 @@ const withBodyMassRecords = (entry: any) =>
  * Get body mass data from the XML file
  */
 const getBodyMassFromFile = async (filePath: string) => {
-  const parsed = await parse(filePath)
+  const parsed = await parseXMLFile(filePath)
 
   return parsed?.ClinicalDocument?.component[0]?.section[0]?.entry
     .find(withBodyMassRecords)
