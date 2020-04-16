@@ -8,7 +8,7 @@ export default async (givenPath: string) => {
   const parsed = await parseStringPromise(content, { ignoreAttrs: true })
 
   const entries: any[] =
-    parsed?.ClinicalDocument?.component[0]?.section[0].entry
+    parsed?.ClinicalDocument?.component[0]?.section[0]?.entry
 
   const data: any = []
 
