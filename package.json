@@ -1,5 +1,5 @@
 {
-  "name": "apple-health-export-bodyweight-to-json",
+  "name": "@nikkiselev/apple-health-export-bodyweight-to-json",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -28,12 +28,22 @@
   "bin": {
     "apple-health-data-body-mass-to-json": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "author": "Nikolai Kiselev",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nikkiselev/apple-health-data-body-mass-to-json.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/nikkiselev/apple-health-data-body-mass-to-json/issues"
+  },
+  "homepage": "https://github.com/nikkiselev/apple-health-data-body-mass-to-json#readme",
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/minimist": "^1.2.0",
