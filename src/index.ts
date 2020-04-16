@@ -8,16 +8,14 @@ const parse = async (filePath: string) => {
   return parseStringPromise(content, { ignoreAttrs: true })
 }
 
-const bodyMassTypeName = 'HKQuantityTypeIdentifierBodyMass'
-
 const transform = (record: any) => {
-  const text: any = record?.observation[0]?.text[0]
-  return { weight: text.value[0] }
+  const [value] = record?.observation[0]?.text[0]
+  return { value }
 }
 
 const entryWithBodyMassRecords = (entry: any) =>
   entry?.organizer[0]?.component[0]?.observation[0]?.text[0]?.type[0] ===
-  bodyMassTypeName
+  'HKQuantityTypeIdentifierBodyMass'
 
 export default async (filePath: string) => {
   const parsed = await parse(filePath)
