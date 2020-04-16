@@ -30,6 +30,10 @@
   },
   "author": "Nikolai Kiselev",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikkiselev/apple-health-data-body-mass-to-json.git"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@types/minimist": "^1.2.0",
