@@ -10,8 +10,8 @@ const parse = async (filePath: string) => {
 
 const bodyMassTypeName = 'HKQuantityTypeIdentifierBodyMass'
 
-const getBodyMassFromEntry = (entry: any) => {
-  const text: any = entry?.observation[0]?.text[0]
+const transform = (record: any) => {
+  const text: any = record?.observation[0]?.text[0]
   return { weight: text.value[0] }
 }
 
@@ -22,19 +22,7 @@ const entryWithBodyMassRecords = (entry: any) =>
 export default async (filePath: string) => {
   const parsed = await parse(filePath)
 
-  const entries: any[] =
-    parsed?.ClinicalDocument?.component[0]?.section[0]?.entry
-
-  const data: any = []
-
-  const ourEntry = entries.find(entryWithBodyMassRecords)
-
-  for (const component of ourEntry?.organizer[0]?.component) {
-    const bm = getBodyMassFromEntry(component)
-    if (bm) {
-      data.push(bm)
-    }
-  }
-
-  return data
+  return parsed?.ClinicalDocument?.component[0]?.section[0]?.entry
+    .find(entryWithBodyMassRecords)
+    ?.organizer[0]?.component.map(transform)
 }
