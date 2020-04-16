@@ -17,7 +17,7 @@ const transform = (record: any) => {
   return { value, date }
 }
 
-const entryWithBodyMassRecords = (entry: any) =>
+const withBodyMassRecords = (entry: any) =>
   entry?.organizer[0]?.component[0]?.observation[0]?.text[0]?.type[0] ===
   'HKQuantityTypeIdentifierBodyMass'
 
@@ -25,6 +25,6 @@ export default async (filePath: string) => {
   const parsed = await parse(filePath)
 
   return parsed?.ClinicalDocument?.component[0]?.section[0]?.entry
-    .find(entryWithBodyMassRecords)
+    .find(withBodyMassRecords)
     ?.organizer[0]?.component.map(transform)
 }
