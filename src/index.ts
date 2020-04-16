@@ -2,10 +2,14 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { parseStringPromise } from 'xml2js'
 
-export default async (givenPath: string) => {
-  const content = await fs.readFile(path.join(__dirname, givenPath), 'utf8')
+const parse = async (filePath: string) => {
+  const content = await fs.readFile(path.join(__dirname, filePath), 'utf8')
 
-  const parsed = await parseStringPromise(content, { ignoreAttrs: true })
+  return parseStringPromise(content, { ignoreAttrs: true })
+}
+
+export default async (filePath: string) => {
+  const parsed = await parse(filePath)
 
   const entries: any[] =
     parsed?.ClinicalDocument?.component[0]?.section[0]?.entry
